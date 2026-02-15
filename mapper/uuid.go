@@ -4,29 +4,8 @@ import (
 	"github.com/google/uuid"
 )
 
-func ValidateID(s string) bool {
-	err := uuid.Validate(s)
-	return err == nil
-}
-
-func ValidateIDs(s []string) bool {
-	valid := true
-	for _, v := range s {
-		err := uuid.Validate(v)
-		if err != nil {
-			valid = false
-			break
-		}
-	}
-	return valid
-}
-
-func FromIDProto(s *string) *uuid.UUID {
-	if s == nil || *s == "" {
-		return nil
-	}
-
-	parsed, err := uuid.Parse(*s)
+func FromUUIDProto(s string) *uuid.UUID {
+	parsed, err := uuid.Parse(s)
 	if err != nil {
 		return nil
 	}
@@ -34,7 +13,7 @@ func FromIDProto(s *string) *uuid.UUID {
 	return &parsed
 }
 
-func FromIDsProto(s []string) []uuid.UUID {
+func FromUUIDsProto(s []string) []uuid.UUID {
 	result := make([]uuid.UUID, 0, len(s))
 	for i, v := range s {
 		parsed, err := uuid.Parse(v)
@@ -47,18 +26,14 @@ func FromIDsProto(s []string) []uuid.UUID {
 	return result
 }
 
-func ToIDProto(u *uuid.UUID) string {
-	if u == nil {
-		return ""
-	}
-
+func ToUUIDProto(u uuid.UUID) string {
 	return u.String()
 }
 
-func ToIDsProto(u []uuid.UUID) []string {
+func ToUUIDsProto(u []uuid.UUID) []string {
 	result := make([]string, 0, len(u))
 	for i, v := range u {
-		result[i] = ToIDProto(&v)
+		result[i] = ToUUIDProto(v)
 	}
 	return result
 }
