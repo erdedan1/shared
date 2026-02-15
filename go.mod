@@ -1,4 +1,4 @@
-module shared
+module github.com/erdedan1/shared
 
 go 1.26.0
 
