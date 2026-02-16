@@ -11,6 +11,7 @@ type Logger interface {
 	Warn(layer string, method string, msg string, args ...interface{})
 	Error(layer string, method string, msg string, err error, args ...interface{})
 	Sync() error
+	With(args ...zap.Field) Logger
 }
 
 type logger struct {
