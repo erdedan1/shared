@@ -10,6 +10,7 @@ type Logger interface {
 	Info(layer string, method string, msg string, args ...interface{})
 	Warn(layer string, method string, msg string, args ...interface{})
 	Error(layer string, method string, msg string, err error, args ...interface{})
+	Sync() error
 }
 
 type logger struct {
@@ -70,4 +71,14 @@ func (l *logger) Warn(layer string, method string, msg string, args ...interface
 		zap.String("method", method),
 		zap.Any("details", args),
 	)
+}
+
+func (l *logger) With(args ...zap.Field) Logger {
+	return &logger{
+		logger: l.logger.With(args...),
+	}
+}
+
+func (l *logger) Sync() error {
+	return l.logger.Sync()
 }
