@@ -6,12 +6,12 @@ import (
 )
 
 type Logger interface {
-	Debug(layer string, method string, msg string, args ...interface{})
-	Info(layer string, method string, msg string, args ...interface{})
-	Warn(layer string, method string, msg string, args ...interface{})
-	Error(layer string, method string, msg string, err error, args ...interface{})
+	Debug(method string, msg string, args ...interface{})
+	Info(method string, msg string, args ...interface{})
+	Warn(method string, msg string, args ...interface{})
+	Error(method string, msg string, err error, args ...interface{})
 	Sync() error
-	With(args ...zap.Field) Logger
+	Layer(layer string) Logger
 }
 
 type logger struct {
@@ -37,46 +37,42 @@ func NewLogger(level string) (Logger, error) {
 	}, nil
 }
 
-func (l *logger) Debug(layer string, method string, msg string, args ...interface{}) {
+func (l *logger) Debug(method string, msg string, args ...interface{}) {
 	l.logger.Debug(
 		msg,
-		zap.String("layer", layer),
 		zap.String("method", method),
 		zap.Any("details", args),
 	)
 }
 
-func (l *logger) Info(layer string, method string, msg string, args ...interface{}) {
+func (l *logger) Info(method string, msg string, args ...interface{}) {
 	l.logger.Info(
 		msg,
-		zap.String("layer", layer),
 		zap.String("method", method),
 		zap.Any("details", args),
 	)
 }
 
-func (l *logger) Error(layer string, method string, msg string, err error, args ...interface{}) {
+func (l *logger) Error(method string, msg string, err error, args ...interface{}) {
 	l.logger.Error(
 		msg,
-		zap.String("layer", layer),
 		zap.String("method", method),
 		zap.Error(err),
 		zap.Any("details", args),
 	)
 }
 
-func (l *logger) Warn(layer string, method string, msg string, args ...interface{}) {
+func (l *logger) Warn(method string, msg string, args ...interface{}) {
 	l.logger.Warn(
 		msg,
-		zap.String("layer", layer),
 		zap.String("method", method),
 		zap.Any("details", args),
 	)
 }
 
-func (l *logger) With(args ...zap.Field) Logger {
+func (l *logger) Layer(layer string) Logger {
 	return &logger{
-		logger: l.logger.With(args...),
+		logger: l.logger.With(zap.String("layer", layer)),
 	}
 }
 
