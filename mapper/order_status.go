@@ -1,14 +1,12 @@
 package proto_mapper
 
 import (
-	"errors"
-
 	pb "github.com/erdedan1/protocol/proto/order_service/gen"
 )
 
-func StringOrderStatusToProto(strOrderStatus string) (*pb.OrderStatus, error) {
+func StringOrderStatusToProto(strOrderStatus string) *pb.OrderStatus {
 	if r, ok := pb.OrderStatus_value[strOrderStatus]; ok {
-		return pb.OrderStatus(r).Enum(), nil
+		return pb.OrderStatus(r).Enum()
 	}
-	return nil, errors.New("")
+	return pb.OrderStatus_ORDER_STATUS_UNSPECIFIED.Enum()
 }
