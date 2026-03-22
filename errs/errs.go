@@ -7,16 +7,18 @@ import (
 type CustomError struct {
 	Code    ErrorCode
 	Message string
+	err     error
 }
 
 func (c *CustomError) Error() string {
 	return fmt.Sprintf("code: %d, message: %s", c.Code, c.Message)
 }
 
-func New(code ErrorCode, msg string) *CustomError {
+func New(code ErrorCode, msg string, err error) *CustomError {
 	return &CustomError{
 		Code:    code,
 		Message: msg,
+		err:     err,
 	}
 }
 
