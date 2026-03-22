@@ -9,6 +9,7 @@ require (
 )
 
 require (
+	github.com/erdedan1/protocol v1.0.2 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
 	go.opentelemetry.io/otel v1.40.0 // indirect
 	go.opentelemetry.io/otel/sdk/metric v1.40.0 // indirect
