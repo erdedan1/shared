@@ -7,7 +7,7 @@ import (
 type CustomError struct {
 	Code    ErrorCode
 	Message string
-	err     error
+	Err     error
 }
 
 func (c *CustomError) Error() string {
@@ -18,8 +18,12 @@ func New(code ErrorCode, msg string, err error) *CustomError {
 	return &CustomError{
 		Code:    code,
 		Message: msg,
-		err:     err,
+		Err:     err,
 	}
+}
+
+func (c *CustomError) Unwrap() error {
+	return c.Err
 }
 
 type ErrorCode int
