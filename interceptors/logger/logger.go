@@ -4,12 +4,13 @@ import (
 	"context"
 	"time"
 
-	"go.uber.org/zap"
+	log "github.com/erdedan1/shared/logger"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
 )
 
-func LoggerServerInterceptor(log *zap.Logger) grpc.UnaryServerInterceptor {
+func LoggerServerInterceptor(log log.Logger) grpc.UnaryServerInterceptor {
 	return func(
 		ctx context.Context,
 		req interface{},
@@ -23,11 +24,14 @@ func LoggerServerInterceptor(log *zap.Logger) grpc.UnaryServerInterceptor {
 		md, _ := metadata.FromIncomingContext(ctx)
 		rid := md.Get("x-request-id")
 
-		log.Info("request",
-			zap.String("method", info.FullMethod),
-			zap.String("request_id", firstOrEmpty(rid)),
-			zap.Duration("duration", time.Since(start)),
-			zap.Error(err),
+		log.Info(
+			"Interceptors",
+			"LoggerServerInterceptor",
+			"grpc request handled",
+			"method", info.FullMethod,
+			"request_id", firstOrEmpty(rid),
+			"duration", time.Since(start),
+			"error", err,
 		)
 
 		return resp, err
