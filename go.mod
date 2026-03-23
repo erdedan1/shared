@@ -1,15 +1,16 @@
 module github.com/erdedan1/shared
 
-go 1.26.0
+go 1.26.1
 
 require (
+	github.com/erdedan1/protocol v1.0.3
 	github.com/google/uuid v1.6.0
 	go.uber.org/zap v1.27.1
-	google.golang.org/grpc v1.79.1
+	google.golang.org/grpc v1.79.3
 )
 
 require (
-	github.com/erdedan1/protocol v1.0.2 // indirect
+	github.com/envoyproxy/protoc-gen-validate v1.3.3 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
 	go.opentelemetry.io/otel v1.40.0 // indirect
 	go.opentelemetry.io/otel/sdk/metric v1.40.0 // indirect
