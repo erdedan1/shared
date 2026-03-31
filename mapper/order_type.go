@@ -4,7 +4,7 @@ import (
 	pb "github.com/erdedan1/protocol/proto/order_service/gen/v1"
 )
 
-func OderTypeFromProto(orderType pb.OrderType) string {
+func OrderTypeFromProto(orderType pb.OrderType) string {
 	switch orderType {
 	case pb.OrderType_ORDER_TYPE_BUY:
 		return "BUY"
