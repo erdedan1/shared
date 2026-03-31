@@ -1,7 +1,7 @@
 package mapper
 
 import (
-	pb "github.com/erdedan1/protocol/proto/order_service/gen/v1"
+	pb "github.com/erdedan1/protocol/proto/spot_instrument_service/gen/v1"
 )
 
 func UserRoleFromProto(userRole pb.UserRole) string {
