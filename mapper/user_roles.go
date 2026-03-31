@@ -1,31 +1,58 @@
 package mapper
 
 import (
-	pb "github.com/erdedan1/protocol/proto/spot_instrument_service/gen/v1"
+	pbo "github.com/erdedan1/protocol/proto/order_service/gen/v1"
+	pbs "github.com/erdedan1/protocol/proto/spot_instrument_service/gen/v1"
 )
 
-func UserRoleFromProto(userRole pb.UserRole) string {
+func UserRoleFromProtoSpot(userRole pbs.UserRole) string {
 	switch userRole {
-	case pb.UserRole_USER_ROLE_TRADER:
+	case pbs.UserRole_USER_ROLE_TRADER:
 		return "TRADER"
-	case pb.UserRole_USER_ROLE_ADMIN:
+	case pbs.UserRole_USER_ROLE_ADMIN:
 		return "ADMIN"
-	case pb.UserRole_USER_ROLE_VIEWER:
+	case pbs.UserRole_USER_ROLE_VIEWER:
 		return "VIEWER"
 	default:
 		return "UNSPECIFIED"
 	}
 }
 
-func UserRoleToProto(userRole string) pb.UserRole {
+func UserRoleToProtoSpot(userRole string) pbs.UserRole {
 	switch userRole {
 	case "TRADER":
-		return pb.UserRole_USER_ROLE_TRADER
+		return pbs.UserRole_USER_ROLE_TRADER
 	case "ADMIN":
-		return pb.UserRole_USER_ROLE_ADMIN
+		return pbs.UserRole_USER_ROLE_ADMIN
 	case "VIEWER":
-		return pb.UserRole_USER_ROLE_VIEWER
+		return pbs.UserRole_USER_ROLE_VIEWER
 	default:
-		return pb.UserRole_USER_ROLE_UNSPECIFIED
+		return pbs.UserRole_USER_ROLE_UNSPECIFIED
+	}
+}
+
+func UserRoleFromProtoOrder(userRole pbo.UserRole) string {
+	switch userRole {
+	case pbo.UserRole_USER_ROLE_TRADER:
+		return "TRADER"
+	case pbo.UserRole_USER_ROLE_ADMIN:
+		return "ADMIN"
+	case pbo.UserRole_USER_ROLE_VIEWER:
+		return "VIEWER"
+	default:
+		return "UNSPECIFIED"
+	}
+}
+
+func UserRoleToProtoOrder(userRole string) pbo.UserRole {
+	switch userRole {
+	case "TRADER":
+		return pbo.UserRole_USER_ROLE_TRADER
+	case "ADMIN":
+		return pbo.UserRole_USER_ROLE_ADMIN
+	case "VIEWER":
+		return pbo.UserRole_USER_ROLE_VIEWER
+	default:
+		return pbo.UserRole_USER_ROLE_UNSPECIFIED
 	}
 }
