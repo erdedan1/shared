@@ -1,16 +1,16 @@
 package mapper
 
 import (
-	pb "github.com/erdedan1/protocol/proto/order_service/gen/v2"
+	pb "github.com/erdedan1/protocol/proto/order_service/gen/v1"
 )
 
 func UserRoleFromProto(userRole pb.UserRole) string {
 	switch userRole {
-	case 1:
+	case pb.UserRole_USER_ROLE_TRADER:
 		return "TRADER"
-	case 2:
+	case pb.UserRole_USER_ROLE_ADMIN:
 		return "ADMIN"
-	case 3:
+	case pb.UserRole_USER_ROLE_VIEWER:
 		return "VIEWER"
 	default:
 		return "UNSPECIFIED"
@@ -20,30 +20,12 @@ func UserRoleFromProto(userRole pb.UserRole) string {
 func UserRoleToProto(userRole string) pb.UserRole {
 	switch userRole {
 	case "TRADER":
-		return 1
+		return pb.UserRole_USER_ROLE_TRADER
 	case "ADMIN":
-		return 2
+		return pb.UserRole_USER_ROLE_ADMIN
 	case "VIEWER":
-		return 3
+		return pb.UserRole_USER_ROLE_VIEWER
 	default:
-		return 0
+		return pb.UserRole_USER_ROLE_UNSPECIFIED
 	}
-}
-
-func UserRolesToProto(urs []string) []pb.UserRole {
-	res := make([]pb.UserRole, 0, len(urs))
-	for _, role := range urs {
-		pbRole := UserRoleToProto(role)
-		res = append(res, pbRole)
-	}
-	return res
-}
-
-func UserRolesFromProto(pbRoles []pb.UserRole) []string {
-	res := make([]string, 0, len(pbRoles))
-	for _, role := range pbRoles {
-		urs := UserRoleFromProto(role)
-		res = append(res, urs)
-	}
-	return res
 }

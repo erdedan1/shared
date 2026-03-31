@@ -1,32 +1,32 @@
 package mapper
 
 import (
-	pb "github.com/erdedan1/protocol/proto/order_service/gen/v2"
+	pb "github.com/erdedan1/protocol/proto/order_service/gen/v1"
 )
 
 func OrderStatusFromProto(orderStatus pb.OrderStatus) string {
 	switch orderStatus {
-	case 1:
+	case pb.OrderStatus_ORDER_STATUS_CREATED:
 		return "CREATED"
-	case 2:
+	case pb.OrderStatus_ORDER_STATUS_PENDING:
 		return "PENDING"
-	case 3:
+	case pb.OrderStatus_ORDER_STATUS_WAIT_SELLER:
 		return "WAIT_SELLER"
-	case 4:
+	case pb.OrderStatus_ORDER_STATUS_PAID:
 		return "PAID"
-	case 5:
+	case pb.OrderStatus_ORDER_STATUS_ON_HOLD:
 		return "ON_HOLD"
-	case 6:
+	case pb.OrderStatus_ORDER_STATUS_PROCESSING:
 		return "PROCESSING"
-	case 7:
+	case pb.OrderStatus_ORDER_STATUS_PACKED:
 		return "PACKED"
-	case 8:
+	case pb.OrderStatus_ORDER_STATUS_OUT_OF_DELIVERY:
 		return "OUT_OF_DELIVERY"
-	case 9:
-		return "ORDER_STATUSON_THE_WAY"
-	case 10:
+	case pb.OrderStatus_ORDER_STATUS_ON_THE_WAY:
+		return "ORDER_STATUS_ON_THE_WAY"
+	case pb.OrderStatus_ORDER_STATUS_DELIVERED:
 		return "DELIVERED"
-	case 11:
+	case pb.OrderStatus_ORDER_STATUS_CLOSED:
 		return "CLOSED"
 	default:
 		return "UNSPECIFIED"
@@ -36,28 +36,28 @@ func OrderStatusFromProto(orderStatus pb.OrderStatus) string {
 func OrderStatusToProto(orderStatus string) pb.OrderStatus {
 	switch orderStatus {
 	case "CREATED":
-		return 1
+		return pb.OrderStatus_ORDER_STATUS_CREATED
 	case "PENDING":
-		return 2
+		return pb.OrderStatus_ORDER_STATUS_PENDING
 	case "WAIT_SELLER":
-		return 3
+		return pb.OrderStatus_ORDER_STATUS_WAIT_SELLER
 	case "PAID":
-		return 4
+		return pb.OrderStatus_ORDER_STATUS_PAID
 	case "ON_HOLD":
-		return 5
+		return pb.OrderStatus_ORDER_STATUS_ON_HOLD
 	case "PROCESSING":
-		return 6
+		return pb.OrderStatus_ORDER_STATUS_PROCESSING
 	case "PACKED":
-		return 7
+		return pb.OrderStatus_ORDER_STATUS_PACKED
 	case "OUT_OF_DELIVERY":
-		return 8
-	case "ORDER_STATUSON_THE_WAY":
-		return 9
+		return pb.OrderStatus_ORDER_STATUS_OUT_OF_DELIVERY
+	case "ON_THE_WAY":
+		return pb.OrderStatus_ORDER_STATUS_ON_THE_WAY
 	case "DELIVERED":
-		return 10
+		return pb.OrderStatus_ORDER_STATUS_DELIVERED
 	case "CLOSED":
-		return 11
+		return pb.OrderStatus_ORDER_STATUS_CLOSED
 	default:
-		return 0
+		return pb.OrderStatus_ORDER_STATUS_UNSPECIFIED
 	}
 }

@@ -55,6 +55,7 @@ func (l *logger) Info(layer string, method string, msg string, args ...interface
 }
 
 func (l *logger) Error(layer string, method string, msg string, err error, args ...interface{}) {
+
 	l.logger.Error(
 		msg,
 		zap.String("layer", layer),
